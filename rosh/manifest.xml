@@ -1,0 +1,30 @@
+<package>
+  <description brief="rosh">
+
+     rosh is a Python-based scripting and runtime environment for ROS.  Through rosh and its various plugins, you can interact with ROS APIs in an introspectable and unified approach.
+
+  </description>
+  <author>Ken Conley</author>
+  <license>BSD</license>
+  <review status="API reviewed" notes="2010/10"/>
+  <url>http://ros.org/wiki/rosh</url>
+
+  <!-- temporary, to test rewrite of roslaunch -->
+  <depend package="roshlaunch"/>
+  
+  <depend package="rospy"/>
+  <depend package="rosgraph"/>
+  <depend package="rosnode"/>
+  <depend package="rostopic"/>
+  <depend package="rosservice"/>
+  <depend package="rosparam"/>
+  <depend package="rosmsg"/>
+
+  <rosdep name="ipython" />
+
+  <export>
+    <rosdoc config="${prefix}/rosdoc.yaml" />
+  </export>
+</package>
+
+

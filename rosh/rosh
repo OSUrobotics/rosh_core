@@ -1,0 +1,80 @@
+#!/usr/bin/env python
+__requires__ = 'ipython==0.13.2'
+
+import os
+import sys
+
+NAME='rosh'
+
+def rosh_main(args=None):
+    if args is None:
+        args=sys.argv
+    args = args[1:]
+    import optparse
+    parser = optparse.OptionParser(usage="usage: %prog pkg/Type [options]", prog=NAME)
+    parser.add_option("--plugins", 
+                      dest="plugins", default='',
+                      metavar="PLUGINS",
+                      help="Comma-separated list of plugins to load")
+    options, args = parser.parse_args(args)
+
+    names = [n for n in args if n.startswith('__name:=')]
+    if names:
+        if len(names) != 1:
+            parser.error("You may only specify one roshlet name")
+        name = names[0]
+    else:
+        name = 'roshlet'
+
+    # just-in-time load deps
+    import roslib
+    roslib.load_manifest('rosh')
+    import rospy
+    # - filter out remapping args
+    args = rospy.myargv(args)
+    if len(args) > 1:
+        parser.error("Please specify only one roshlet pkg/Type")
+
+    if args:
+        # resolve args[0] as either a filename or a pkg/Type
+        import rosh.impl.roshlets
+        arg = args[0]
+        if os.path.isfile(arg):
+            script = arg
+        else:
+            if '/' not in args[0]:
+                parser.error("Please specify roshlet pkg/Type, e.g. rosh/echolet.py")
+            try:
+                package, type_ = arg.split('/')
+            except:
+                parser.error("Invalid roshlet pkg/Type: %s"%(args[0]))
+
+            script = rosh.impl.roshlets.find_roshlet(package, type_)
+
+        # run the rosh script
+        try:
+            rosh.impl.roshlets.standalone(name, script, options.plugins.split(','))
+        except KeyboardInterrupt:
+            # squelch ctrl-c exits
+            pass
+
+    else:
+        # emulate the behavior of Python: drop into interpreter if no file args
+        # load script otherwise
+
+        plugins = options.plugins.split(',')
+
+        import roslib.packages
+        p = os.path.join(roslib.packages.get_pkg_dir('rosh'), 'shell.py')
+        argv = [p]
+        sys.argv = [sys.argv[0]] + ['-i', p]
+        if options.plugins:
+            sys.argv.extend(options.plugins.split(','))
+
+        from IPython.frontend.terminal import ipapp
+        app = ipapp.TerminalIPythonApp.instance() 
+        app.initialize()
+        app.start()
+    
+if __name__ == '__main__':
+    rosh_main(args=sys.argv)

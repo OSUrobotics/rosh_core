@@ -1,0 +1,23 @@
+<package>
+  <description brief="ROSH Process Launcher">
+
+roshlaunch is a temporary package for redesigning roslaunch to have better programmatic APIs for libraries like rosh.
+
+  </description>
+  <author>Ken Conley/kwc@willowgarage.com</author>
+  <license>BSD</license>
+  <review status="experimental" />
+  <url>http://ros.org/wiki/roslaunch</url>
+  <depend package="roslib"/>
+  <depend package="rosclean"/>
+  <depend package="rosgraph"/>
+  <depend package="rospy"/>
+  <depend package="rosmaster"/>  
+  <depend package="rosout"/>
+  <rosdep name="paramiko"/>
+  <rosdep name="python-yaml"/>
+  <export>
+    <rosdoc config="rosdoc.yaml"/>
+  </export>    
+</package>
+

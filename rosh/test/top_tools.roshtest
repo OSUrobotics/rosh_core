@@ -1,0 +1,38 @@
+talker = packages.test_ros.nodes.talker_py()
+
+#MUX
+
+# - implicit
+topics.chatter_muxed = topics.chatter
+test('hello' in topics.chatter_muxed[1].data)
+
+# - explicit
+m = mux([topics.chatter, topics.chatter_fake], topics.chatter_mux2)
+test('hello' in topics.chatter_mux2[1].data)
+test('hello' in m.topic_input[1].data)
+test('/chatter' == m.topic_input._name)
+
+# - switch
+m(topics.chatter_fake2)
+test('/chatter_fake2' == m.topic_input._name)
+kill(m)
+
+#RELAY
+
+r = relay(topics.chatter, topics.chatter_relay)
+test('hello' in topics.chatter_relay[1].data)
+test('hello' in r.topic_output[1].data)
+kill(r)
+
+
+# UDPRELAY
+r = udprelay(topics.chatter, topics.chatter_udprelay)
+test('hello' in topics.chatter_udprelay[1].data)
+kill(r)
+
+# THROTTLE
+t = throttle(topics.chatter, topics.chatter_1hz, 1)
+test('hello' in topics.chatter_1hz[1].data)
+kill(t)
+
+kill(talker)

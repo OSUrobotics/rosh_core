@@ -1,0 +1,74 @@
+# STRING tests: these just test the high level API. The msg itself is very simple
+m1 = msg('data: foo', msg.std_msgs.String)
+m2 = msg({'data': 'foo'}, msg.std_msgs.String)
+m3 = msg.std_msgs.String('foo')
+m4 = msg.std_msgs.String('bar')
+
+test(m1 == m2)
+test(m1 == m3)
+test(m1 != m4)
+
+
+def fequal(f1, f2):
+    return abs(f1-f2) < 0.01
+
+# Test with subset of fields
+q1 = msg('x: 11.0\ny: 12.0\nz: 13.0', msg.geometry_msgs.Quaternion) # omit w
+q2 = msg.geometry_msgs.Quaternion(11., 12., 13., 0.)
+test(fequal(q1.x, q2.x) and fequal(q1.y, q2.y) and fequal(q1.z, q2.z) and fequal(q1.w, q2.w))
+
+# TwistWithCovarianceStamped: this msg is more complicated and thus stresses the underlying loader more
+
+
+"""
+Header header
+  uint32 seq
+  time stamp
+  string frame_id
+geometry_msgs/TwistWithCovariance twist
+  geometry_msgs/Twist twist
+    geometry_msgs/Vector3 linear
+      float64 x
+      float64 y
+      float64 z
+    geometry_msgs/Vector3 angular
+      float64 x
+      float64 y
+      float64 z
+  float64[36] covariance
+"""
+
+m1 = msg("""
+header: 
+  seq: 101
+  stamp:
+    secs: 1234
+    nsecs: 5678
+  frame_id: base_link
+twist:
+  twist:
+    linear:
+      x: 1.0
+      y: 2.0
+      z: 3.0
+    angular:
+      x: 4.0
+      y: 5.0
+      z: 6.0
+  covariance: [1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0,11.0,12.0,13.0,14.0,15.0,16.0,17.0,18.0,19.0,20.0,21.0,22.0,23.0,24.0,25.0,26.0,27.0,28.0,29.0,30.0,31.0,32.0,33.0,34.0,35.0,36.0]""", msg.geometry_msgs.TwistWithCovarianceStamped)
+
+cov = [1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0,11.0,12.0,13.0,14.0,15.0,16.0,17.0,18.0,19.0,20.0,21.0,22.0,23.0,24.0,25.0,26.0,27.0,28.0,29.0,30.0,31.0,32.0,33.0,34.0,35.0,36.0]
+m2 = msg.geometry_msgs.TwistWithCovarianceStamped()
+m2.header = Header(101, Time(1234, 5678), 'base_link')
+m2.twist.twist.linear = msg.geometry_msgs.Vector3(1., 2., 3.)
+m2.twist.twist.angular = msg.geometry_msgs.Vector3(4.,5.,6.)
+m2.twist.covariance = cov
+
+test(m1.header == m2.header)
+l1 = m1.twist.twist.linear
+l2 = m2.twist.twist.linear
+test(fequal(l1.x, l2.x) and fequal(l1.y, l2.y) and fequal(l1.z, l2.z))
+l1 = m1.twist.twist.angular
+l2 = m2.twist.twist.angular
+test(fequal(l1.x, l2.x) and fequal(l1.y, l2.y) and fequal(l1.z, l2.z))
+    

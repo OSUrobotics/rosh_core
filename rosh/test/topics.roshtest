@@ -1,0 +1,23 @@
+test(LATEST == -1)
+
+foo = None
+def callback(m):
+    print "callback", m
+    global foo
+    foo = m
+    
+rostype(topics.foo, msg.std_msgs.String)
+s = subscribe(topics.foo, callback)
+topics.foo('foo 1')
+import time
+time.sleep(1.0)
+test(foo.data == 'foo 1')
+test(topics.foo[LATEST].data == 'foo 1')
+
+s.close()
+
+topics.foo.publish('foo 2')
+import time
+time.sleep(1.0)
+test(foo.data == 'foo 1')
+

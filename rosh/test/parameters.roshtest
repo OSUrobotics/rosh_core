@@ -1,0 +1,47 @@
+#test.add_coverage('rosh.impl.parameters')
+
+# test basic assignments
+
+parameters.a = 1
+test(parameters.a() == 1)
+parameters.a = True
+test(parameters.a())
+parameters.a = False
+test(not parameters.a())
+parameters.a = [1, 2, 3, 4]
+test(parameters.a() == [1, 2, 3, 4])
+
+# test namespaces
+
+parameters.a = {'integer': 1, 'bool': True, 'string': 'hello', 'child': {'integer': 2, 'bool': False}}
+test(parameters.a.integer() == 1)
+test(parameters.a.bool())
+test(parameters.a.string() == 'hello')
+test(parameters.a.child.integer() == 2)
+test(not parameters.a.child.bool())
+
+parameters.b.c.d = 1
+test(parameters.b.c.d() == 1)
+test(parameters.b.c() == {'d': 1})
+test(parameters.b() == {'c': {'d': 1}})
+
+# test contains
+
+parameters.a = 'test'
+test('a' in parameters)
+test('not_exists' not in parameters)
+
+parameters.b.c.d = 1
+test('c' in parameters.b)
+test('d' not in parameters.b)
+test('d' in parameters.b.c)
+
+# test deletion
+
+parameters.a = 'test'
+del parameters.a
+try:
+    parameters.a()
+    test(False)
+except KeyError:
+    pass

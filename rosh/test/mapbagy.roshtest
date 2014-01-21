@@ -1,0 +1,74 @@
+# STRING tests: these just test the high level API. The msg itself is very simple
+m1 = msg('data: foo', msg.std_msgs.String)
+m2 = msg.std_msgs.String('foo')
+m3 = msg.std_msgs.String('bar')
+
+test(m1 == m2)
+test(m1 != m3)
+
+# Test __setitem__
+with MapBagy('foo1.bagy', 'w') as b:
+    b['key1'] = m1
+    b['key2'] = m2    
+    b['key3'] = m3
+
+# Test write()
+with MapBagy('foo2.bagy', 'w') as b:
+    b.write('key1', m1)
+    b.write('key2', m2)    
+    b.write('key3', m3)
+
+# Verify __setitem__ and write()
+with open('foo1.bagy') as f:
+    text1 = f.read()
+with open('foo2.bagy') as f:
+    text2 = f.read()
+test(text1 == text2)    
+    
+test(text1 == 'key1:\n  data: foo\n'+\
+              'key2:\n  data: foo\n'+\
+              'key3:\n  data: bar\n')
+
+# Test keyword write
+with MapBagy('foo3.bagy', 'w') as b:
+    b.write(key1=m1, key2=m2, key3=m3)
+
+# Test read()
+for b in ['foo1.bagy', 'foo3.bagy']:
+    with MapBagy(b, 'r', msg.std_msgs.String) as b:
+        d = b.read()
+        test(d['key1'] == m1)
+        test(d['key2'] == m2)
+        test(d['key3'] == m3)
+
+# Test __iter__
+
+b = MapBagy('foo1.bagy', 'r', msg.std_msgs.String)
+d = {}
+for k,m in b:
+    d[k] = m
+b.close()
+
+test(d == {'key1': m1, 'key2': m2, 'key3': m3})
+
+# Test iteritems()
+b = MapBagy('foo1.bagy', 'r', msg.std_msgs.String)
+d = {}
+for k,m in b:
+    d[k] = m
+b.close()
+
+test(d == {'key1': m1, 'key2': m2, 'key3': m3})
+
+# Test iterkeys() and keys()
+with MapBagy('foo1.bagy', 'r', msg.std_msgs.String) as b:
+     keys = [k for k in b.iterkeys()]
+     test(set(keys) == set(['key1', 'key2', 'key3']))
+     test(set(b.keys()) == set(['key1', 'key2', 'key3']))
+     
+# Test __getitem__
+with MapBagy('foo1.bagy', 'r', msg.std_msgs.String) as b:
+    test(b['key1'] == m1)
+    test(b['key2'] == m2)
+    test(b['key3'] == m3)
+

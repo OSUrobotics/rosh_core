@@ -1,0 +1,29 @@
+test(wait_for_service is not None)
+
+t = rostype(services.rosout.get_loggers)
+test(t != None)
+
+from ros import rospy
+test(t == srv.roscpp.GetLoggers)
+
+s = str(services.rosout.get_loggers)
+test(s.strip() == """---
+roscpp/Logger[] loggers
+  string name
+  string level""")
+
+# test wait for service
+wait_for_service(services.rosout.get_loggers)
+wait_for_service('/rosout/get_loggers')
+
+# test actual calls
+loggers = services.rosout.get_loggers()
+l = loggers.loggers[0]
+services.rosout.set_logger_level(l.name, l.level)
+services.rosout.set_logger_level(logger=l.name, level=l.level)
+x = info(services.rosout.get_loggers)
+test(x.uri.startswith('rosrpc://'))
+test(x.node())
+info(x.node).srvs.rosout.get_loggers()
+
+rostype(services.rosout.get_loggers)._request_class()

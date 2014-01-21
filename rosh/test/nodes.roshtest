@@ -1,0 +1,15 @@
+nodes.rosout()
+str(nodes.rosout)
+x = info(nodes.rosout)
+str(x)
+x.pubs.rosout_agg(msg="hello")
+x.subs.rosout[LATEST]
+x.srvs.rosout.get_loggers()
+
+test(x.pubs.fake == None)
+test(x.subs.fake == None)
+test(x.srvs.fake == None)
+
+n = packages.test_ros.nodes.listener_py()
+sleep(2)
+kill(n)

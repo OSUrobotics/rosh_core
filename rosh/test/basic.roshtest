@@ -1,0 +1,2 @@
+# make sure rospy symbol exists
+test(rospy.Header == msg.std_msgs.Header)

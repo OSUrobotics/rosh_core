@@ -1,0 +1,30 @@
+import os
+roslib_path = os.path.abspath(os.path.join(os.environ['ROS_ROOT'], 'core', 'roslib'))
+test(os.path.abspath(packages.roslib.path) == roslib_path)
+test(packages.roslib.name == 'roslib')
+test(packages.roslib.manifest.license == 'BSD')
+
+#TODO: test depends1 (need to fix API to allow actual value return, ala parameters)
+test(packages.rospy.depends1.roslang.name == 'roslang')
+
+# test msg fetching
+
+m = packages.test_ros.msg.TestString()
+m.caller_id = 'foo'
+m.data = 'bar'
+
+test(packages.rospack.msg == None)
+
+# test srv fetching
+e = packages.std_srvs.srv.Empty()
+test(e._type == 'std_srvs/Empty')
+test(packages.roslib.srv == None)
+
+
+# test node running
+
+p = packages.test_ros.nodes.listener_py()
+import time
+time.sleep(1.) # give node time to spin up cleanly
+test(p._process.roslaunch_process.is_alive())
+kill(p)

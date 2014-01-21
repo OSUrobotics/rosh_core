@@ -1,0 +1,12 @@
+<stack>
+  <description brief="rosh_core">
+     Main ROSH scripting and interpreter environment.
+  </description>
+  <author>Maintained by Ken Conley</author>
+  <license>BSD</license>  
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/rosh_core</url>
+  <depend stack="ros" /> <!-- roslib, rosclean -->
+  <depend stack="ros_comm" /> <!-- rosparam, rosgraph, rosmaster, rosout, rosservice, rospy, rostopic, rosnode, rosmsg -->
+
+</stack>

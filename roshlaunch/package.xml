@@ -2,14 +2,14 @@
   <name>roshlaunch</name>
   <version>1.0.0</version>
   <description>roshlaunch is a temporary package for redesigning roslaunch to have better programmatic APIs for libraries like rosh.</description>
-  <maintainer email="kwc@willowgarage.com">Ken Conley</maintainer>
+  <maintainer email="dan@lazewatsky.com">Dan Lazewatsky</maintainer>
 
   <license>BSD</license>
 
   <url type="website">http://ros.org/wiki/roslaunch</url>
-  <!-- <url type="bugtracker"></url> -->
+  <url type="bugtracker">https://github.com/OSUrobotics/rosh_core/issues</url>
 
-  <author email="kwc@willowgarage.com">Ken Conley</author>
+  <author>Ken Conley</author>
 
   <!-- Dependencies which this package needs to build itself. -->
   <buildtool_depend>catkin</buildtool_depend>

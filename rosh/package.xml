@@ -7,7 +7,7 @@
   <license>BSD</license>
 
   <url type="website">http://ros.org/wiki/rosh</url>
-  <!-- <url type="bugtracker"></url> -->
+  <url type="bugtracker">https://github.com/OSUrobotics/rosh_core/issues</url>
 
   <author>Ken Conley</author>
 
@@ -15,7 +15,6 @@
   <buildtool_depend>catkin</buildtool_depend>
 
   <!-- Dependencies needed to compile this package. -->
-  <build_depend>roshlaunch</build_depend>
   <build_depend>rospy</build_depend>
   <build_depend>rosgraph</build_depend>
   <build_depend>rosnode</build_depend>
@@ -33,6 +32,7 @@
   <run_depend>rosservice</run_depend>
   <run_depend>rosparam</run_depend>
   <run_depend>rosmsg</run_depend>
+  <run_depend>ipython</run_depend>
 
   <!-- Dependencies needed only for running tests. -->
   <!-- <test_depend>roshlaunch</test_depend> -->

@@ -2,14 +2,14 @@
   <name>rosh_core</name>
   <version>1.0.0</version>
   <description>Main ROSH scripting and interpreter environment.</description>
-  <maintainer email="dan@lazewatsky.com">Maintained by Dan Lazewatsky</maintainer>
+  <maintainer email="dan@lazewatsky.com">Dan Lazewatsky</maintainer>
 
   <license>BSD</license>
 
   <url type="website">http://ros.org/wiki/rosh_core</url>
-  <!-- <url type="bugtracker"></url> -->
+  <url type="bugtracker">https://github.com/OSUrobotics/rosh_core/issues</url>
 
-  <author>Maintained by Dan Lazewatsky</author>
+  <author>Ken Conley</author>
 
   <!-- Dependencies which this package needs to build itself. -->
   <buildtool_depend>catkin</buildtool_depend>
@@ -22,11 +22,8 @@
   <run_depend>rosh</run_depend>
 
   <!-- Dependencies needed only for running tests. -->
-
-
-
-
-
-
+  <export>
+    <metapackage/>
+  </export>
 
 </package>

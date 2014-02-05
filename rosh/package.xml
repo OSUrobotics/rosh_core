@@ -1,0 +1,51 @@
+<package>
+  <name>rosh</name>
+  <version>1.0.0</version>
+  <description>rosh is a Python-based scripting and runtime environment for ROS.  Through rosh and its various plugins, you can interact with ROS APIs in an introspectable and unified approach.</description>
+  <maintainer email="dan@lazewatsky.com">Dan Lazewatsky</maintainer>
+
+  <license>BSD</license>
+
+  <url type="website">http://ros.org/wiki/rosh</url>
+  <!-- <url type="bugtracker"></url> -->
+
+  <author>Ken Conley</author>
+
+  <!-- Dependencies which this package needs to build itself. -->
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <!-- Dependencies needed to compile this package. -->
+  <build_depend>roshlaunch</build_depend>
+  <build_depend>rospy</build_depend>
+  <build_depend>rosgraph</build_depend>
+  <build_depend>rosnode</build_depend>
+  <build_depend>rostopic</build_depend>
+  <build_depend>rosservice</build_depend>
+  <build_depend>rosparam</build_depend>
+  <build_depend>rosmsg</build_depend>
+
+  <!-- Dependencies needed after this package is compiled. -->
+  <run_depend>roshlaunch</run_depend>
+  <run_depend>rospy</run_depend>
+  <run_depend>rosgraph</run_depend>
+  <run_depend>rosnode</run_depend>
+  <run_depend>rostopic</run_depend>
+  <run_depend>rosservice</run_depend>
+  <run_depend>rosparam</run_depend>
+  <run_depend>rosmsg</run_depend>
+
+  <!-- Dependencies needed only for running tests. -->
+  <!-- <test_depend>roshlaunch</test_depend> -->
+  <!-- <test_depend>rospy</test_depend> -->
+  <!-- <test_depend>rosgraph</test_depend> -->
+  <!-- <test_depend>rosnode</test_depend> -->
+  <!-- <test_depend>rostopic</test_depend> -->
+  <!-- <test_depend>rosservice</test_depend> -->
+  <!-- <test_depend>rosparam</test_depend> -->
+  <!-- <test_depend>rosmsg</test_depend> -->
+
+<export>
+    <rosdoc config="${prefix}/rosdoc.yaml"/>
+</export>
+
+</package>

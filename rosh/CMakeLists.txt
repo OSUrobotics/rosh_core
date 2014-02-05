@@ -1,20 +1,12 @@
-cmake_minimum_required(VERSION 2.4.6)
-include($ENV{ROS_ROOT}/core/rosbuild/rosbuild.cmake)
+cmake_minimum_required(VERSION 2.8.3)
+project(rosh)
+find_package(catkin REQUIRED)
+catkin_package()
+catkin_python_setup()
 
-# Set the build type.  Options are:
-#  Coverage       : w/ debug symbols, w/o optimization, w/ code-coverage
-#  Debug          : w/ debug symbols, w/o optimization
-#  Release        : w/o debug symbols, w/ optimization
-#  RelWithDebInfo : w/ debug symbols, w/ optimization
-#  MinSizeRel     : w/o debug symbols, w/ optimization, stripped binaries
-#set(ROS_BUILD_TYPE RelWithDebInfo)
+catkin_add_nosetests(test/test_rosh_impl_topic.py)
 
-rosbuild_init()
-
-#set the default path for built executables to the "bin" directory
-set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
-#set the default path for built libraries to the "lib" directory
-set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
-
-# Disabled failing test, #2629
-rosbuild_add_pyunit(test/test_rosh_impl_topic.py)
+install(PROGRAMS
+    rosh
+    nodes/roshlet.py
+    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})

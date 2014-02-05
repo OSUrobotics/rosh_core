@@ -1,0 +1,45 @@
+<package>
+  <name>roshlaunch</name>
+  <version>1.0.0</version>
+  <description>roshlaunch is a temporary package for redesigning roslaunch to have better programmatic APIs for libraries like rosh.</description>
+  <maintainer email="kwc@willowgarage.com">Ken Conley</maintainer>
+
+  <license>BSD</license>
+
+  <url type="website">http://ros.org/wiki/roslaunch</url>
+  <!-- <url type="bugtracker"></url> -->
+
+  <author email="kwc@willowgarage.com">Ken Conley</author>
+
+  <!-- Dependencies which this package needs to build itself. -->
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <!-- Dependencies needed to compile this package. -->
+  <build_depend>roslib</build_depend>
+  <build_depend>rosclean</build_depend>
+  <build_depend>rosgraph</build_depend>
+  <build_depend>rospy</build_depend>
+  <build_depend>rosmaster</build_depend>
+  <build_depend>rosout</build_depend>
+
+  <!-- Dependencies needed after this package is compiled. -->
+  <run_depend>roslib</run_depend>
+  <run_depend>rosclean</run_depend>
+  <run_depend>rosgraph</run_depend>
+  <run_depend>rospy</run_depend>
+  <run_depend>rosmaster</run_depend>
+  <run_depend>rosout</run_depend>
+
+  <!-- Dependencies needed only for running tests. -->
+  <!-- <test_depend>roslib</test_depend> -->
+  <!-- <test_depend>rosclean</test_depend> -->
+  <!-- <test_depend>rosgraph</test_depend> -->
+  <!-- <test_depend>rospy</test_depend> -->
+  <!-- <test_depend>rosmaster</test_depend> -->
+  <!-- <test_depend>rosout</test_depend> -->
+
+<export>
+    <rosdoc config="rosdoc.yaml"/>
+</export>
+
+</package>

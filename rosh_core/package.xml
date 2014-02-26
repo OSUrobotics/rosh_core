@@ -1,6 +1,6 @@
 <package>
   <name>rosh_core</name>
-  <version>1.0.2</version>
+  <version>1.0.3</version>
   <description>Main ROSH scripting and interpreter environment.</description>
   <maintainer email="dan@lazewatsky.com">Dan Lazewatsky</maintainer>
 

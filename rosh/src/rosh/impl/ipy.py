@@ -40,7 +40,7 @@ import sys
 
 import roslib.packages
 import roslib.stacks
-import roslib.rosenv
+import rospkg
 
 def pkg_stack_completers(self, event):
     return roslib.packages.list_pkgs() + roslib.stacks.list_stacks()
@@ -64,7 +64,7 @@ def ipy_magic_init():
 
 def ipy_roscd(magic, target):
     if not target:
-        magic.magic_cd(roslib.rosenv.get_ros_root())
+        magic.magic_cd(rospkg.get_ros_root())
     else:
         splits = target.split(os.sep)
         target = splits[0]

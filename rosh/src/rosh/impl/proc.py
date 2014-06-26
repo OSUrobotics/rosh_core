@@ -42,7 +42,7 @@ manipulate the environment in ways that would affect subprocesses.
 import os
 from subprocess import Popen, PIPE
 
-import roslib.rosenv
+import rosgraph.rosenv
 import roslaunch
 
 # TODO: get rid of this routine or replace with Exec
@@ -51,7 +51,7 @@ def run(config, cmd, stdout=True):
     Run the specified command using the current ROS configuration.
     """
     env = os.environ.copy()
-    env[roslib.rosenv.ROS_MASTER_URI] = config.master.master_uri
+    env[rosgraph.rosenv.ROS_MASTER_URI] = config.master.master_uri
     
     if 0:
         print "CMD", cmd

@@ -45,7 +45,6 @@ import os
 import sys
 
 import roslib.packages
-import roslib.rosenv
 
 # declare shell globals
 

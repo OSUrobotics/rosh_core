@@ -17,7 +17,4 @@ install(PROGRAMS
 	DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
 
-if (CATKIN_ENABLE_TESTING)
-  find_package(rostest REQUIRED)
-  catkin_add_nosetests(test/test_rosh_impl_topic.py)
-endif(CATKIN_ENABLE_TESTING)
+catkin_add_nosetests(test/test_rosh_impl_topic.py)

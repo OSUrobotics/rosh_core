@@ -7,6 +7,16 @@ import sys
 NAME='rosh'
 
 def rosh_main(args=None):
+    import rosnode
+    msg = 'Warning: roscore is not running. This will cause lots of things not to work.'
+    if sys.stdout.isatty():
+        msg = '\x1b[31m%s\x1b[0m' % msg
+    try:
+        if not '/rosout' in rosnode.get_node_names():
+            print msg
+    except rosnode.ROSNodeIOException:
+        print msg
+
     if args is None:
         args=sys.argv
     args = args[1:]

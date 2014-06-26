@@ -1,6 +1,6 @@
 <package>
   <name>roshlaunch</name>
-  <version>1.0.3</version>
+  <version>1.0.4</version>
   <description>roshlaunch is a temporary package for redesigning roslaunch to have better programmatic APIs for libraries like rosh.</description>
   <maintainer email="dan@lazewatsky.com">Dan Lazewatsky</maintainer>
 

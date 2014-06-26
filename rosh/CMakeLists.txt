@@ -17,4 +17,4 @@ install(PROGRAMS
 	DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
 
-catkin_add_nosetests(test/test_rosh_impl_topic.py)
+# catkin_add_nosetests(test/test_rosh_impl_topic.py)

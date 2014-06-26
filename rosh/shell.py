@@ -17,8 +17,8 @@ for p in plugins:
     load(p, globals())
 
 # load the user's roshrc file, if present
-import roslib.rosenv as _rosenv
-_roshrcp = os.path.join(_rosenv.get_ros_home(), 'rosh', 'roshrc.py')
+import rospkg
+_roshrcp = os.path.join(rospkg.get_ros_home(), 'rosh', 'roshrc.py')
 if os.path.isfile(_roshrcp):
     print "loading roshrc"
     try:
@@ -42,4 +42,4 @@ del plugins
 del sys
 del os
 del _roshrcp
-del _rosenv
+del rospkg

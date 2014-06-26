@@ -52,6 +52,7 @@ from roslib.packages import get_pkg_dir
 import rosmsg
 import rostopic
 import rospy
+import rospkg
 
 import rosh.impl.proc
 from rosh.impl.exceptions import ROSHException
@@ -624,7 +625,7 @@ def show_graph(ns_obj):
     
 def show_rostopic(ns_obj):
     # rostopic echo in a separate window
-    ros_root = roslib.rosenv.get_ros_root()
+    ros_root = rospkg.get_ros_root()
     success = rosh.impl.proc.run(ns_obj._config, ['xterm', '-e', os.path.join(ros_root, 'bin', 'rostopic'), 'echo', ns_obj._name], stdout=False)
     # TODO: return proc object instead
     if success:

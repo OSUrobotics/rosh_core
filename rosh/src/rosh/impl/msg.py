@@ -37,6 +37,7 @@ from __future__ import with_statement
 import sys
 
 import roslib.packages
+import rospkg
 import rospy
 
 import rosmsg
@@ -66,10 +67,10 @@ class MsgPackage(Namespace):
         """
         try:
             if not self._ns:
-                return rosmsg.list_packages(mode=self._config.mode)
+                return [pkg for pkg, _ in rosmsg.iterate_packages(rospkg.RosPack(), self._config.mode)]
             else:
                 return rosmsg.list_types(self._name, mode=self._config.mode)
-        except:
+        except Exception, e:
             return []
 
     def _getAttributeNames(self):
@@ -87,7 +88,7 @@ class MsgPackage(Namespace):
         elif key in self._msg_cache:
             return self._msg_cache[key]
         else:
-            if self._config.mode == roslib.msgs.EXT:
+            if self._config.mode == rosmsg.MODE_MSG:
                 v = self._type = get_message_class(self._ns + key)
             else:
                 v = self._type = get_service_class(self._ns + key)

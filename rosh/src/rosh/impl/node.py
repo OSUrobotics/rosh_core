@@ -145,7 +145,7 @@ class NodeNS(Namespace):
     def _init_uri(self):
         if self._name and self._uri is None:
             try:
-                self._uri = rosnode.get_api_uri(self._config.master.handle, self._name)
+                self._uri = rosnode.get_api_uri(self._config.master, self._name.strip('/'))
             except:
                 pass
         

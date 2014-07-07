@@ -2,8 +2,8 @@
 Changelog for package rosh
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.0.5 (2014-07-07)
+------------------
 * fix errors caused by API changes
 * Contributors: Dan Lazewatsky
 

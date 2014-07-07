@@ -1,6 +1,6 @@
 <package>
   <name>rosh</name>
-  <version>1.0.4</version>
+  <version>1.0.5</version>
   <description>rosh is a Python-based scripting and runtime environment for ROS.  Through rosh and its various plugins, you can interact with ROS APIs in an introspectable and unified approach.</description>
   <maintainer email="dan@lazewatsky.com">Dan Lazewatsky</maintainer>
 

@@ -2,6 +2,11 @@
 Changelog for package rosh
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* fix errors caused by API changes
+* Contributors: Dan Lazewatsky
+
 1.0.4 (2014-06-26)
 ------------------
 * warn if roscore isn't running (fixes `#1 <https://github.com/OSUrobotics/rosh_core/issues/1>`_)

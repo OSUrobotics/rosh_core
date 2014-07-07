@@ -109,7 +109,7 @@ if __name__ == '__main__':
         tests = list_tests(d)
     for test_name, test_path in tests:
         #rostest.unitrun(PKG, sys.argv[0], create_TestCase(test_name, test_path))
-        tc = create_TestCase(test_name, test_path)
+        tc = create_TestCase(str(test_name), test_path)
         tests = loader.loadTestsFromTestCase(tc)
         suite.addTests(tests)
 

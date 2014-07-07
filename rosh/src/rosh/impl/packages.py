@@ -42,6 +42,7 @@ import roslib.manifest
 import roslib.packages
 import roslib.stack_manifest
 import roslib.stacks
+import rospkg
 
 # TODO: get rid of Namespace and Concept entirely as that really doesn't apply here and just requires workarounds
 from rosh.impl.namespace import Namespace, Concept, ResourceList
@@ -99,7 +100,8 @@ class Package(ManifestResource):
         return roslib.packages.get_pkg_dir(self.name)
 
     def _get_manifest(self, path):
-        return roslib.manifest.parse_file(os.path.join(path, roslib.manifest.MANIFEST_FILE))
+        rp = rospkg.RosPack()
+        return rp.get_manifest(self.name)
 
     def _get_msgs(self):
         try:
@@ -230,11 +232,13 @@ class Stack(ManifestResource):
         return roslib.stacks.get_stack_dir(self.name)
 
     def _get_manifest(self, path):
-        return roslib.stack_manifest.parse_file(os.path.join(path, roslib.stack_manifest.STACK_FILE))
+        # return roslib.stack_manifest.parse_file(os.path.join(path, roslib.stack_manifest.STACK_FILE))
+        rs = rospkg.RosStack()
+        return rs.get_manifest(self.name)
 
     def _get_packages(self):
         # we have to use the config from packages in order to get access to its cache
-        return ResourceList(self._config.ctx.packages._config, roslib.stacks.packages_of(self.name), Package)
+        return ResourceList(self._config.ctx.packages._config, rospkg.RosStack().packages_of(self.name), Package)
 
     packages = property(_get_packages)
 
@@ -294,9 +298,9 @@ class ManifestResources(Concept):
 class Packages(ManifestResources):
 
     def __init__(self, ctx, lock,):
-        super(Packages, self).__init__(ctx, lock, Package, roslib.packages.list_pkgs_by_path)
+        super(Packages, self).__init__(ctx, lock, Package, rospkg.RosPack().list)
 
 class Stacks(ManifestResources):
 
     def __init__(self, ctx, lock):
-        super(Stacks, self).__init__(ctx, lock, Stack, roslib.stacks.list_stacks)
+        super(Stacks, self).__init__(ctx, lock, Stack, rospkg.RosStack().list)

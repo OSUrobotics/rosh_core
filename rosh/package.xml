@@ -16,13 +16,6 @@
 
   <!-- Dependencies needed to compile this package. -->
   <build_depend>rospy</build_depend>
-  <build_depend>rosgraph</build_depend>
-  <build_depend>rosnode</build_depend>
-  <build_depend>rostopic</build_depend>
-  <build_depend>rosservice</build_depend>
-  <build_depend>rosparam</build_depend>
-  <build_depend>rosmsg</build_depend>
-  <build_depend>rostest</build_depend>
 
   <!-- Dependencies needed after this package is compiled. -->
   <run_depend>roshlaunch</run_depend>

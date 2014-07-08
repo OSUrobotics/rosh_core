@@ -15,12 +15,7 @@
   <buildtool_depend>catkin</buildtool_depend>
 
   <!-- Dependencies needed to compile this package. -->
-  <build_depend>roslib</build_depend>
-  <build_depend>rosclean</build_depend>
-  <build_depend>rosgraph</build_depend>
   <build_depend>rospy</build_depend>
-  <build_depend>rosmaster</build_depend>
-  <build_depend>rosout</build_depend>
 
   <!-- Dependencies needed after this package is compiled. -->
   <run_depend>roslib</run_depend>

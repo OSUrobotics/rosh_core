@@ -136,7 +136,7 @@ class Package(ManifestResource):
     def _get_launches(self):
         paths = list_resources_by_dir(self.path, launch_filter)
         launch_types = [os.path.basename(p) for p in paths]
-        d = dict([(launchablekey(t), LaunchableLaunch(self._config.ctx, self.name, t)) for t in launch_types])
+        d = dict([(launchablekey(t), LaunchableNode(self._config.ctx, self.name, t)) for t in launch_types])
         return AttrDict(d)
 
     # use singular to match 'msg' global

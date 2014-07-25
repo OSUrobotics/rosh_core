@@ -2,8 +2,8 @@
 Changelog for package rosh
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.0.6 (2014-07-25)
+------------------
 * fix a typo in Package._get_launches
 * fixes from catkin_lint
 * make sure rosh.impl gets installed

@@ -2,6 +2,11 @@
 Changelog for package roshlaunch
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* fixes from catkin_lint
+* Contributors: Dan Lazewatsky
+
 1.0.5 (2014-07-07)
 ------------------
 

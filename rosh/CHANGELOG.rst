@@ -2,6 +2,13 @@
 Changelog for package rosh
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* fix a typo in Package._get_launches
+* fixes from catkin_lint
+* make sure rosh.impl gets installed
+* Contributors: Dan Lazewatsky
+
 1.0.5 (2014-07-07)
 ------------------
 * fix errors caused by API changes

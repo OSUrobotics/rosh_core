@@ -616,12 +616,12 @@ class Topics(Concept):
 
 
 def show_graph(ns_obj):
-    #TODO: in ROS 1.3, rxgraph will be a node within rxgraph so we can use launch instead of run()
-    success = rosh.impl.proc.launch(ns_obj._config.ctx, 'rxgraph', 'rxgraph', args=['--topicns', ns_obj._ns])
+    # TODO: rqt_graph doesn't support passing in a ns, so this just brings up rqt_graph in '/' regardless of the current ns
+    success = rosh.impl.proc.launch_node(ns_obj._config.ctx, 'rqt_graph', 'rqt_graph')
     if success:
         print "showing graph of topics in namespace %s"%ns_obj._ns
     else:
-        print >> sys.stderr, "failed to launch rxgraph"
+        print >> sys.stderr, "failed to launch rqt_graph"
     
 def show_rostopic(ns_obj):
     # rostopic echo in a separate window

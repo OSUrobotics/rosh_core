@@ -37,6 +37,7 @@ from __future__ import with_statement
 import rosnode
 import rospy
 
+import rosh.impl.proc
 from rosh.impl.exceptions import ROSHException
 from rosh.impl.namespace import Namespace, Concept, NSResourceList
 
@@ -153,7 +154,7 @@ class NodeNS(Namespace):
         """
         show() handler
         """
-        show_graph(self._ns)
+        show_graph(self)
     
     def __repr__(self):
         return self.__str__()
@@ -197,11 +198,12 @@ class Nodes(Concept):
         super(Nodes, self).__init__(ctx, lock, NodeNS)
 
     def _show(self):
-        show_graph('/')
+        show_graph(self._root)
 
-def show_graph(ns):
-    import subprocess
-    cmd = ['rxgraph', '--nodens', ns]
-    # TODO: check for error return code?
-    subprocess.Popen(cmd, stderr=subprocess.PIPE)
-
+def show_graph(ns_obj):
+    # TODO: rqt_graph doesn't support passing in a ns, so this just brings up rqt_graph in '/' regardless of the current ns
+    success = rosh.impl.proc.launch_node(ns_obj._config.ctx, 'rqt_graph', 'rqt_graph')
+    if success:
+        print "showing graph of topics in namespace %s"%ns_obj._ns
+    else:
+        print >> sys.stderr, "failed to launch rqt_graph"

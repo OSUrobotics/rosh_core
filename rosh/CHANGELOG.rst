@@ -2,8 +2,8 @@
 Changelog for package rosh
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.0.7 (2014-08-17)
+------------------
 * replace rxgraph with rqt_graph (doesn't support ns args)
 * Contributors: Dan Lazewatsky
 

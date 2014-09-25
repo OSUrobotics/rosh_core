@@ -135,13 +135,7 @@ class NodeNS(Namespace):
         return rosnode.get_node_names(namespace=self._ns)
 
     def _kill(self):
-        if self._process is not None:
-            # kill attached process directly
-            self._process._kill()
-            self._process = None
-        else:
-            # TODO: enhance roslaunch API to allow more direct kill
-            rosnode.kill_nodes([self._name])
+        rosnode.kill_nodes([self._name])
     
     def _init_uri(self):
         if self._name and self._uri is None:

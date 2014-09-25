@@ -43,6 +43,7 @@ import roslib.packages
 import roslib.stack_manifest
 import roslib.stacks
 import rospkg
+from catkin.find_in_workspaces import find_in_workspaces as catkin_find
 
 # TODO: get rid of Namespace and Concept entirely as that really doesn't apply here and just requires workarounds
 from rosh.impl.namespace import Namespace, Concept, ResourceList
@@ -128,7 +129,11 @@ class Package(ManifestResource):
     #TODO: can we make nodes and launches plugins on top of packages,
     #that way rosh can be provided in the separated ROS stack.
     def _get_nodes(self):
-        paths = list_resources_by_dir(self.path, node_filter)
+        paths = sum(
+            [list_resources_by_dir(d, node_filter)
+             for d
+             in catkin_find(search_dirs=['libexec', 'share'], project=self.name)], []
+        )
         node_types = [os.path.basename(p) for p in paths]
         d = dict([(launchablekey(t), LaunchableNode(self._config.ctx, self.name, t)) for t in node_types])
         return AttrDict(d)

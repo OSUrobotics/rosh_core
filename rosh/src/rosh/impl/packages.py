@@ -134,8 +134,7 @@ class Package(ManifestResource):
              for d
              in catkin_find(search_dirs=['libexec', 'share'], project=self.name)], []
         )
-        node_types = [os.path.basename(p) for p in paths]
-        d = dict([(launchablekey(t), LaunchableNode(self._config.ctx, self.name, t)) for t in node_types])
+        d = dict([(launchablekey(os.path.basename(t)), LaunchableNode(self._config.ctx, self.name, t)) for t in paths])
         return AttrDict(d)
 
     def _get_launches(self):
@@ -163,10 +162,11 @@ except ImportError:
     roslaunch = FakeLaunch()
     
 class LaunchableNode(object):
-    def __init__(self, ctx, package, type_):
+    def __init__(self, ctx, package, path_):
         self.ctx = ctx
         self.package = package
-        self.type = type_
+        self.type = os.path.basename(path_)
+        self.path = os.path.dirname(path_)
     def __call__(self, *args, **kwds):
         # launch returns list of Nodes that were launched, so unwrap
         return self.ctx.launch(self.as_Node(), args=args, remap=kwds)[0]

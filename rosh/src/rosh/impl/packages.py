@@ -189,20 +189,23 @@ class LaunchableFile(object):
         self.file = os.path.basename(launch_file)
         self.path = os.path.dirname(launch_file)
         self._launch_config = roslaunch.config.load_config_default([launch_file], 0)
+        self._nodes = None
     def __call__(self):
         raise NotImplemented
     def __str__(self):
         return launchablekey(self.launch_file)
     def _launch(self):
-        raise NotImplemented
+        return [self.ctx.launch(n.as_Node())[0] for n in self.nodes.__dict__.values()]
     def _get_nodes(self):
-        d = dict([
-            (
-                launchablekey(n.name),
-                LaunchableNode(self.ctx, n.package, roslib.packages.find_node(n.package, n.type)[0])
-            )
-            for n in self._launch_config.nodes])
-        return AttrDict(d)
+        if not self._nodes:
+            d = dict([
+                (
+                    launchablekey(n.name),
+                    LaunchableNode(self.ctx, n.package, roslib.packages.find_node(n.package, n.type)[0], n)
+                )
+                for n in self._launch_config.nodes])
+            self._nodes = AttrDict(d)
+        return self._nodes
 
     nodes = property(_get_nodes)
 

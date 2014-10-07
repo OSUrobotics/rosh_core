@@ -2,8 +2,8 @@
 Changelog for package rosh
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.0.8 (2014-10-07)
+------------------
 * super basic ability to run launch files
 * add nodes property to LaunchableFile
 * look for resources (nodes) in the right places

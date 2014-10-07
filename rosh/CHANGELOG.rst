@@ -2,6 +2,14 @@
 Changelog for package rosh
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* super basic ability to run launch files
+* add nodes property to LaunchableFile
+* look for resources (nodes) in the right places
+* Fix `#7 <https://github.com/OSUrobotics/rosh_core/issues/7>`_ (kill fails) - it looks like NodeNS._kill was never fully implemented
+* Contributors: Dan Lazewatsky
+
 1.0.7 (2014-08-17)
 ------------------
 * replace rxgraph with rqt_graph (doesn't support ns args)

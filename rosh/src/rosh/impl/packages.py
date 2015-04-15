@@ -172,7 +172,9 @@ class LaunchableNode(object):
         # launch returns list of Nodes that were launched, so unwrap
         node = self.as_Node()
         node.name = node_name
-        return self.ctx.launch(node, args=args, remap=kwds)[0]
+        node.remap_args = kwds.items()
+        self.roslaunch_node = node
+        return self.ctx.launch(node, args=args)[0]
         
     def as_Node(self):
         if self.roslaunch_node:

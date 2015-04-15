@@ -168,9 +168,11 @@ class LaunchableNode(object):
         self.type = os.path.basename(path_)
         self.path = os.path.dirname(path_)
         self.roslaunch_node = roslaunch_node
-    def __call__(self, *args, **kwds):
+    def __call__(self, node_name=None, *args, **kwds):
         # launch returns list of Nodes that were launched, so unwrap
-        return self.ctx.launch(self.as_Node(), args=args, remap=kwds)[0]
+        node = self.as_Node()
+        node.name = node_name
+        return self.ctx.launch(node, args=args, remap=kwds)[0]
         
     def as_Node(self):
         if self.roslaunch_node:

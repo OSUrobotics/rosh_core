@@ -2,8 +2,8 @@
 Changelog for package rosh
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.0.9 (2015-04-16)
+------------------
 * pass remapping args onto the Node object
 * add argument so nodes can be explicitly named
 * Contributors: Dan Lazewatsky

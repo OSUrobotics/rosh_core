@@ -2,6 +2,12 @@
 Changelog for package rosh
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* pass remapping args onto the Node object
+* add argument so nodes can be explicitly named
+* Contributors: Dan Lazewatsky
+
 1.0.8 (2014-10-07)
 ------------------
 * super basic ability to run launch files

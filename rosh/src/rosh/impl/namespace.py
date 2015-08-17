@@ -42,6 +42,7 @@ services, parameters).
 from __future__ import with_statement
 
 import roslib.names
+from rosh.impl.exceptions import ROSHException
 
 class Context(object):
     """

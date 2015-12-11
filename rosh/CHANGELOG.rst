@@ -2,6 +2,12 @@
 Changelog for package rosh
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* change how executable gets installed
+* get node name better
+* Contributors: Dan Lazewatsky
+
 1.0.9 (2015-04-16)
 ------------------
 * pass remapping args onto the Node object

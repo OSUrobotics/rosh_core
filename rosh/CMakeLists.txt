@@ -6,10 +6,15 @@ find_package(catkin REQUIRED COMPONENTS rospy)
 catkin_python_setup()
 catkin_package()
 
-install(PROGRAMS
-    rosh
-    nodes/roshlet.py
-    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+#install(PROGRAMS
+#    rosh
+#    nodes/roshlet.py
+#    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+
+catkin_install_python(PROGRAMS
+	rosh
+	nodes/roshlet.py
+	DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 
 install(PROGRAMS
 	shell.py
